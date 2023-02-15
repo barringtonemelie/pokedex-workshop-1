@@ -15,14 +15,37 @@ const Pokecard = (props) =>
   )
 
 //Den här komponenten ska ta emot datat om pokemons (en array av objekt) och rendera vardera Pokecard. Använd dig av map()!
-const Pokedex = (props) => 
-  (
+const Pokedex = (props) => {
+  return (
     <div className="pokedex">
       {props.pokemons.map(item => {
+        console.log(item); 
         return <Pokecard key={item.id} id={item.id} name={item.name} type={item.type} experience={item.base_experience} />
       })}
     </div>
   )
+}
+
+//Slumpa en hand med 4 kort, 2 ggr med Pokedex 
+const PokeGame = (props) => {
+  let pokemonListOne = [];
+  let pokemonListTwo = [];
+  props.pokemons.forEach(pokemon => pokemonListOne.push(pokemon)); 
+
+  const shuffledPokemons = pokemonListOne.sort(() => Math.random() - 0.5); 
+  pokemonListOne = shuffledPokemons.slice(0, 4); 
+  pokemonListTwo = shuffledPokemons.slice(4, 8);
+
+  return (
+    <div>
+      <Pokedex pokemons={pokemonListOne}/>
+      <Pokedex pokemons={pokemonListTwo}/>
+    </div>
+  )
+  
+  //TODO: Compare hands
+
+}
 
 
 function App() {
@@ -41,13 +64,9 @@ function App() {
   return (
     <div className="App">
       <h1>Pokedex</h1>
-      <Pokedex pokemons={pokeData}/>
+      <PokeGame pokemons={pokeData}/>
     </div>
   )
 }
-
-
-
-
 
 export default App
