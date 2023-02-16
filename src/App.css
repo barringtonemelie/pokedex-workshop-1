@@ -7,22 +7,39 @@ body {
   display: flex; 
   justify-content: center;
   align-items: center;
-}
-
-h1 {
-  color: lightgrey; 
-  grid-area: header;
-  text-align: center;
+  font-family: sans-serif; 
 }
 
 .pokedex {
   width: 80vw; 
   display: grid; 
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 100px 1fr 50px 100px;
   grid-template-areas: 
-    "header header header"
-    "poke poke poke"
-    "mon mon mon";
+    "header header header header"
+    "card card card card"
+    "exp exp exp exp"
+    "result result result result"
+  ;
+}
+
+.pokedex > h1 {
+  color: lightgrey; 
+  grid-area: header;
+  text-align: center;
+  font-size: 4rem;
+}
+
+.pokedex > h3 {
+  text-align: center;
+  grid-area: exp;
+  height: 200px; 
+}
+
+.pokedex > h4 {
+  color: red; 
+  text-align: center;
+  grid-area: result;
 }
 
 .pokecard {
@@ -41,6 +58,8 @@ h1 {
 .pokecard > h2 {
   color: blue; 
 }
+
+
 
 .pokecard > img {
   width: 200px; 

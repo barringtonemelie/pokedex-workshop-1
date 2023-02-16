@@ -2,8 +2,7 @@ import * as React from 'react';
 import "./App.css"; 
 
 
-//Den här komponenten visar en Pokemon med namn, bild, typ och experience. För varje PokeCard ska bild läsas in: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png
-//Skapa layout i App.css
+//Den här komponenten visar en Pokemon med namn, bild, typ och experience.
 const Pokecard = (props) => 
   (
     <div className="pokecard">
@@ -14,14 +13,16 @@ const Pokecard = (props) =>
     </div>
   )
 
-//Den här komponenten ska ta emot datat om pokemons (en array av objekt) och rendera vardera Pokecard. Använd dig av map()!
+//Den här komponenten ska ta emot datat om pokemons (en array av objekt) och rendera vardera Pokecard. 
 const Pokedex = (props) => {
   return (
     <div className="pokedex">
+      <h1>Pokedex</h1>
       {props.pokemons.map(item => {
-        console.log(item); 
         return <Pokecard key={item.id} id={item.id} name={item.name} type={item.type} experience={item.base_experience} />
       })}
+      <h3>Total experience: {props.totalExp}</h3>
+      <h4>{props.isWinner ? "THIS HAND WINS!" : ""}</h4>
     </div>
   )
 }
@@ -36,14 +37,29 @@ const PokeGame = (props) => {
   pokemonListOne = shuffledPokemons.slice(0, 4); 
   pokemonListTwo = shuffledPokemons.slice(4, 8);
 
+  let handOneSum = 0; 
+  let handTwoSum = 0; 
+
+
+  pokemonListOne.forEach(pokemon => {
+    handOneSum += pokemon.base_experience; 
+  });
+
+  pokemonListTwo.forEach(pokemon => {
+    handTwoSum += pokemon.base_experience; 
+  });
+
+  console.log(handOneSum, handTwoSum); 
+  let isWinner; 
+
   return (
     <div>
-      <Pokedex pokemons={pokemonListOne}/>
-      <Pokedex pokemons={pokemonListTwo}/>
+      {isWinner = handOneSum > handTwoSum ? true : false}
+      <Pokedex pokemons={pokemonListOne} totalExp={handOneSum} isWinner={isWinner} />
+      {isWinner = handTwoSum > handOneSum ? true : false}
+      <Pokedex pokemons={pokemonListTwo} totalExp={handTwoSum} isWinner={isWinner}/>
     </div>
   )
-  
-  //TODO: Compare hands
 
 }
 
@@ -63,7 +79,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Pokedex</h1>
       <PokeGame pokemons={pokeData}/>
     </div>
   )
