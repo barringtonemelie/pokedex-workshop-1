@@ -22,7 +22,6 @@ const PokeGame = ({ pokemons }) => {
       handTwoSum += pokemon.base_experience; 
     });
   
-    console.log(handOneSum, handTwoSum); 
     let isWinner; 
   
     return (

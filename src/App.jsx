@@ -2,15 +2,6 @@ import * as React from 'react';
 import "./App.css"; 
 import PokeGame from "../components/pokegame.jsx"; 
 
-
-
-
-
-
-
-
-
-
 function App() {
   const pokeData =
   [
